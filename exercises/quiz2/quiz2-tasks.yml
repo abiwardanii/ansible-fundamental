@@ -1,0 +1,37 @@
+- name: Create user for pod1
+  hosts: managed1-host-abiwardani
+  become: true
+
+  vars_files:
+    - secret.yml
+    - group_vars/managed1-host-abiwardani.yml
+  tasks:
+    - name: Create user ops 1-50
+      user:
+        name: "{{ item.user }}"
+        password: "{{pass | password_hash('sha512')}}"
+      loop: "{{ list_user_ops_managed1 }}"
+    - name: Create user dev 1-50
+      user:
+          name: "{{ item.user }}"
+          password: "{{pass | password_hash('sha512')}}"
+      loop: "{{ list_user_dev_managed1 }}"
+
+- name: Create user for pod2
+  hosts: managed2-host-abiwardani
+  become: true
+
+  vars_files:
+    - secret.yml
+    - group_vars/managed2-host-abiwardani.yml
+  tasks:
+    - name: Create user ops 51-100
+      user:
+        name: "{{ item.user }}"
+        password: "{{pass | password_hash('sha512')}}"
+      loop: "{{ list_user_dev_managed2 }}"
+    - name: Create user dev 51-100
+      user:
+        name: "{{ item.user }}"
+        password: "{{pass | password_hash('sha512')}}"
+      loop: "{{ list_user_ops_managed2 }}"

@@ -1,0 +1,21 @@
+- name: Quiz1
+  become: yes
+  hosts: pod-abiwardani-managed1
+  tasks:
+  - name: Add mariadb 10.4 repository
+    template: src=mariadb.list.j2 dest=/etc/apt/sources.list.d/mariadb.list
+
+  - name: Add key repository
+    apt_key: url=https://mariadb.org/mariadb_release_signing_key.asc state=present
+
+  - name: Update cache
+    apt: update_cache=yes force_apt_get=yes
+
+  - name: Install Mariadb Server
+    apt : name=mariadb-server state=latest 
+
+  - name: Install Mariadb Client
+    apt: name=mariadb-client state=latest 
+
+  - name: Start and Enable service mariadb-server
+    service: name=mariadb state=started enabled=yes

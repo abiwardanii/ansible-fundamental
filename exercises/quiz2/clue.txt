@@ -1,0 +1,15 @@
+1. buat folder quiz2
+2. buat folder group_vars di dalam quiz2
+3. di dalam folder group_vars buat 2 file dengan nama :
+- managed1-host-abiwardani.yml isinya:
+   - variabel list_user_ops_managed1 = (ops[1-50])
+   - variable list_user_dev_managed1 = (dev[1-50])
+4. pada folder quiz2 buat inventory file dengan isi yang sama dengan folder group_vars
+5. di dalam folder quiz2 buat file secret.yml dengan variabel pass adinusa88 dan file ini harus di encrypted
+menggunakan ansible-vault, dan gunakan belajaransible sebagai encryption password. isi encryption password
+dialam file vault-pass dan ubah permission chmod 600
+6. di folder quiz2 buat playbook dengan nama quiz2-tasks.yml
+ - buat nama user dev[1-50] dan ops[1-50] in pod-abiwardani-managed1
+ - buat nama user dev[51-100] dan ops[51-100] in pod-abiwardani-managed2
+ - setip user punya password adinusa88
+ 
